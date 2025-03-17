@@ -104,7 +104,7 @@ if (!isset($_SESSION['user_id'])) {
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                       <img src="../../assets/img/avatars/14.png" alt="user-avatar"
                         class="d-block w-px-100 h-px-100 rounded" id="uploadedAvatar" />
-                      <form action="php/news_update.php" enctype="multipart/form-data" method="POST">
+                      <form action="php/profile_upload.php" enctype="multipart/form-data" method="POST">
                         <div class="button-wrapper">
                           <label for="upload" class="btn btn-primary me-2 mb-3" tabindex="0">
                             <span class="d-none d-sm-block">Upload new photo</span>
