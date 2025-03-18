@@ -35,30 +35,11 @@ if ($result->num_rows > 0) {
         </td>
         <td>
             <span title='" . htmlspecialchars($row["description"]) . "'>
-                " . $shortDesc . (count($descWords) > 20 ? "..." : "") . "
+                " . $shortDesc . (count($descWords) > 40 ? "..." : "") . "
             </span>
         </td>
         <td><span class='badge $statusBadge me-1'>" . htmlspecialchars($row["status"]) . "</span></td>
-        <td>
-            <div class='dropdown'>
-                <button type='button' class='btn p-0 dropdown-toggle hide-arrow' data-bs-toggle='dropdown'>
-                    <i class='ti ti-dots-vertical'></i>
-                </button>
-                <div class='dropdown-menu'>
-                    <a class='dropdown-item edit-btn' 
-                        href='#' 
-                        data-bs-toggle='modal' 
-                        data-bs-target='#detailModal'
-                        data-id='" . htmlspecialchars($row["collab_id"]) . "'
-                        data-logo='" . htmlspecialchars($logoPath) . "'
-                        data-title='" . htmlspecialchars($row["title"]) . "'
-                        data-description='" . htmlspecialchars($row["description"]) . "'
-                        data-status='" . htmlspecialchars($row["status"]) . "'>
-                        See Full Details
-                    </a>
-                </div>
-            </div>
-        </td>
+       
     </tr>";
 
     }

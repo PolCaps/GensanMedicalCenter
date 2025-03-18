@@ -60,9 +60,70 @@ if (!isset($_SESSION['user_id'])) {
     <div class="layout-container">
       <!-- Menu -->
 
-      <?php
-      include 'include/aside.php';
-      ?>
+      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <div class="app-brand demo">
+          <a href="Dashboard.php" class="app-brand-link">
+            <span class="app-brand-logo demo">
+              <img src="../../assets/GMC_Photos/logo.png" alt="Logo" width="25px" height="25px">
+            </span>
+            <span class="app-brand-text demo menu-text fw-bold text-success px-4">Menu</span>
+          </a>
+
+          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+            <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle" data-bs-toggle="tooltip"
+              data-bs-placement="right" title="Fixed Sidebar"></i>
+            <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
+          </a>
+        </div>
+
+        <div class="menu-inner-shadow"></div>
+
+        <ul class="menu-inner py-1">
+          <!-- Page -->
+          <li class="menu-item ">
+            <a href="Dashboard.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-tada-hover ti-smart-home"></i>
+              <div data-i18n="Page 1">Dashboard</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Collaboration.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+              <div data-i18n="Page 2">Collaborations</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="News.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-speakerphone"></i>
+              <div data-i18n="Page 2">News</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Leadership.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-user-star"></i>
+              <div data-i18n="Page 2">Leadership</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Doctors.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-user-heart"></i>
+              <div data-i18n="Page 2">Physicians</div>
+            </a>
+          </li>
+          <li class="menu-item active">
+            <a href="Archive.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-archive"></i>
+              <div data-i18n="Page 2">Archive</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Profile.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-settings"></i>
+              <div data-i18n="Page 2">Account Setting</div>
+            </a>
+          </li>
+        </ul>
+      </aside>
       <!-- / Menu -->
 
       <!-- Layout container -->
@@ -97,62 +158,16 @@ if (!isset($_SESSION['user_id'])) {
                       <th>Collaborator</th>
                       <th>Description</th>
                       <th>Status</th>
-                      <th>Action</th>
                     </tr>
                   </thead>
-                  <tbody class="table-border-bottom-0" id="collaboratorTable">
+                  <tbody class="table-border-bottom-0" id="collaboratorTable"
+                    style="max-height: 200px; overflow-y: auto;">
                     <!-- Data will be loaded here via AJAX -->
                   </tbody>
                 </table>
                 <?php
                 include 'include/logoutModal.php';
                 ?>
-                <div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Edit Collaborator</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                        <form action="php/updateCollaborator.php" enctype="multipart/form-data" method="POST"
-                          class="needs-validation" novalidate>
-                          <!-- Hidden input for ID -->
-                          <input type="hidden" id="edit_collab_id" name="collab_id">
-
-                          <!-- Preview Image -->
-                          <div class="mb-3 text-center">
-                            <label class="form-label" for="edit_logo">Logo</label>
-                            <img id="edit_logo" alt="Logo Preview"
-                              style="max-width: 150px; display: none; border: 1px solid #ccc; padding: 5px; border-radius: 5px; display: block; margin: auto;">
-                          </div>
-
-                          <!-- Collaborator Title -->
-                          <div class="mb-3 mt-4">
-                            <label class="form-label" for="editCollaboratorTitle">Collaborator</label>
-                            <input type="text" class="form-control" id="edit_title" name="title"
-                              placeholder="Enter collaborator title" required />
-                            <div class="invalid-feedback">Please enter a collaborator title.</div>
-                          </div>
-
-                          <!-- Description -->
-                          <div class="mb-3">
-                            <label class="form-label">Description</label>
-                            <textarea class="form-control" id="edit_description" name="description" rows="3"
-                              placeholder="Enter description (max 150 characters)" required maxlength="150"></textarea>
-                            <div class="invalid-feedback">Please enter a description (max 150 characters).</div>
-                          </div>
-
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-label-success" data-bs-dismiss="modal">Close</button>
-                          </div>
-                        </form>
-
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <script>
 
                   function loadCollaborations() {
@@ -167,31 +182,138 @@ if (!isset($_SESSION['user_id'])) {
 
                   document.addEventListener("DOMContentLoaded", loadCollaborations);
 
-                  function attachEventListeners() {
-                    console.log("🔄 Reattaching event listeners...");
+                </script>
 
-                    document.querySelectorAll(".edit-btn").forEach(button => {
-                      button.addEventListener("click", function () {
-                        let collabId = this.getAttribute("data-id");
-                        let logoPath = this.getAttribute("data-logoPath");
-                        let logo = this.getAttribute("data-logo");
-                        let title = this.getAttribute("data-title");
-                        let description = this.getAttribute("data-description");
+              </div>
+            </div>
 
-                        console.log("✏️ Edit Button Clicked!");
-                        console.log("Collab ID:", collabId);
-                        console.log("Title:", title);
-                        console.log("Description:", description);
+            <div class="card mt-4">
+              <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="mb-0">Archived News</h5>
+                <!-- Search Bar (No Submit Button) -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <input type="search" id="searchInputNews" placeholder="Find News" class="form-control"
+                    onkeyup="searchTableNews()" />
+                </div>
+              </div>
 
-                        document.getElementById("edit_collab_id").value = collabId;
-                        document.getElementById("edit_logo").src = logo;
-                        document.getElementById("edit_logo").style.display = "block";
-                        document.getElementById("edit_title").value = title;
-                        document.getElementById("edit_description").value = description;
-                      });
-                    });
+              <div class="table-responsive text-nowrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Summary</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-border-bottom-0" id="NewsTable" style="max-height: 200px; overflow-y: auto;">
+                    <!-- Data will be loaded here via AJAX -->
+                  </tbody>
+                </table>
 
+                <script>
+
+                  function loadNews() {
+                    fetch("php/fetch_archivedNews.php")
+                      .then(response => response.text())
+                      .then(data => {
+                        document.getElementById("NewsTable").innerHTML = data;
+                        attachEventListeners();
+                      })
+                      .catch(error => console.error("Error fetching data:", error));
                   }
+
+                  document.addEventListener("DOMContentLoaded", loadNews);
+
+                </script>
+
+              </div>
+            </div>
+
+
+            <div class="card mt-4">
+              <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="mb-0">Archived Leaders</h5>
+                <!-- Search Bar (No Submit Button) -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <input type="search" id="searchInputLeader" placeholder="Find Leader" class="form-control"
+                    onkeyup="searchTableLeader()" />
+                </div>
+              </div>
+
+              <div class="table-responsive text-nowrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Full Name</th>
+                      <th>Type</th>
+                      <th>Position</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-border-bottom-0" id="LeadershipTable"
+                    style="max-height: 200px; overflow-y: auto;">
+                    <!-- Data will be loaded here via AJAX -->
+                  </tbody>
+                </table>
+
+                <script>
+
+                  function loadLead() {
+                    fetch("php/fetch_archivedLeadership.php")
+                      .then(response => response.text())
+                      .then(data => {
+                        document.getElementById("LeadershipTable").innerHTML = data;
+                        attachEventListeners();
+                      })
+                      .catch(error => console.error("Error fetching data:", error));
+                  }
+
+                  document.addEventListener("DOMContentLoaded", loadLead);
+
+                </script>
+
+              </div>
+            </div>
+
+            <div class="card mt-4">
+              <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="mb-0">Archived Physicians</h5>
+                <!-- Search Bar (No Submit Button) -->
+                <div class="d-flex align-items-center justify-content-between">
+                  <input type="search" id="searchInputDoc" placeholder="Find Leader" class="form-control"
+                    onkeyup="searchTableDoc()" />
+                </div>
+              </div>
+
+              <div class="table-responsive text-nowrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Full Name</th>
+                      <th>Address</th>
+                      <th>Specialty</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-border-bottom-0" id="DocTable" style="max-height: 200px; overflow-y: auto;">
+                    <!-- Data will be loaded here via AJAX -->
+                  </tbody>
+                </table>
+
+                <script>
+
+                  function loadDoc() {
+                    fetch("php/fetch_archivedPhysicians.php")
+                      .then(response => response.text())
+                      .then(data => {
+                        document.getElementById("DocTable").innerHTML = data;
+                        attachEventListeners();
+                      })
+                      .catch(error => console.error("Error fetching data:", error));
+                  }
+
+                  document.addEventListener("DOMContentLoaded", loadDoc);
 
                 </script>
 

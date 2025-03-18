@@ -15,12 +15,12 @@ if (!isset($_SESSION['user_id'])) {
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>GenMed | Dashboard</title>
+  <title>GenMed | Security Settings</title>
 
   <meta name="description" content="" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="../../assets/GMC_Photos/logo.png" />
+  <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,7 +32,6 @@ if (!isset($_SESSION['user_id'])) {
   <link rel="stylesheet" href="../../assets/vendor/fonts/tabler-icons.css" />
   <!-- <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" /> -->
   <!-- <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" /> -->
-
   <!-- Core CSS -->
   <link rel="stylesheet" href="../../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
   <link rel="stylesheet" href="../../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
@@ -41,6 +40,9 @@ if (!isset($_SESSION['user_id'])) {
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="../../assets/vendor/libs/node-waves/node-waves.css" />
   <link rel="stylesheet" href="../../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/typeahead-js/typeahead.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/select2/select2.css" />
+  <link rel="stylesheet" href="../../assets/vendor/libs/@form-validation/form-validation.css" />
   <link rel="stylesheet" href="../../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
   <!-- Page CSS -->
@@ -60,9 +62,70 @@ if (!isset($_SESSION['user_id'])) {
     <div class="layout-container">
       <!-- Menu -->
 
-      <?php
-      include 'include/aside.php';
-      ?>
+      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <div class="app-brand demo">
+          <a href="Dashboard.php" class="app-brand-link">
+            <span class="app-brand-logo demo">
+              <img src="../../assets/GMC_Photos/logo.png" alt="Logo" width="25px" height="25px">
+            </span>
+            <span class="app-brand-text demo menu-text fw-bold text-success px-4">Menu</span>
+          </a>
+
+          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+            <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle" data-bs-toggle="tooltip"
+              data-bs-placement="right" title="Fixed Sidebar"></i>
+            <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
+          </a>
+        </div>
+
+        <div class="menu-inner-shadow"></div>
+
+        <ul class="menu-inner py-1">
+          <!-- Page -->
+          <li class="menu-item">
+            <a href="Dashboard.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-tada-hover ti-smart-home"></i>
+              <div data-i18n="Page 1">Dashboard</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Collaboration.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+              <div data-i18n="Page 2">Collaborations</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="News.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-speakerphone"></i>
+              <div data-i18n="Page 2">News</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Leadership.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-user-star"></i>
+              <div data-i18n="Page 2">Leadership</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Doctors.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-user-heart"></i>
+              <div data-i18n="Page 2">Physicians</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Archive.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-archive"></i>
+              <div data-i18n="Page 2">Archive</div>
+            </a>
+          </li>
+          <li class="menu-item active">
+            <a href="Profile.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-settings"></i>
+              <div data-i18n="Page 2">Account Setting</div>
+            </a>
+          </li>
+        </ul>
+      </aside>
       <!-- / Menu -->
 
       <!-- Layout container -->
@@ -96,53 +159,201 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="card mb-4">
                   <h5 class="card-header">Change Password</h5>
                   <div class="card-body">
-                    <form id="formAccountSettings" method="GET" onsubmit="return false">
+                    <form action="php/change_password.php" method="POST" class="needs-validation" novalidate>
+                      <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_id']; ?>">
+
                       <div class="row">
                         <div class="mb-3 col-md-6 form-password-toggle">
                           <label class="form-label" for="currentPassword">Current Password</label>
                           <div class="input-group input-group-merge">
                             <input class="form-control" type="password" name="currentPassword" id="currentPassword"
-                              placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                            <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                              placeholder="••••••••" minlength="8" required />
+                            <span class="input-group-text cursor-pointer"
+                              onclick="togglePassword('currentPassword', this)">
+                              <i class="ti ti-eye-off"></i>
+                            </span>
                           </div>
+                          <div class="invalid-feedback">Please enter your current password.</div>
                         </div>
                       </div>
+
                       <div class="row">
                         <div class="mb-3 col-md-6 form-password-toggle">
                           <label class="form-label" for="newPassword">New Password</label>
                           <div class="input-group input-group-merge">
                             <input class="form-control" type="password" id="newPassword" name="newPassword"
-                              placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                            <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                              placeholder="••••••••" onkeyup="validatePassword()" required />
+                            <span class="input-group-text cursor-pointer" onclick="togglePassword('newPassword', this)">
+                              <i class="ti ti-eye-off"></i>
+                            </span>
                           </div>
+                          <div class="invalid-feedback">New password must meet security requirements.</div>
                         </div>
 
                         <div class="mb-3 col-md-6 form-password-toggle">
                           <label class="form-label" for="confirmPassword">Confirm New Password</label>
                           <div class="input-group input-group-merge">
                             <input class="form-control" type="password" name="confirmPassword" id="confirmPassword"
-                              placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                            <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
+                              placeholder="••••••••" onkeyup="validatePassword()" required />
+                            <span class="input-group-text cursor-pointer"
+                              onclick="togglePassword('confirmPassword', this)">
+                              <i class="ti ti-eye-off"></i>
+                            </span>
                           </div>
+                          <div class="invalid-feedback">Passwords must match.</div>
                         </div>
+
                         <div class="col-12 mb-4">
                           <h6>Password Requirements:</h6>
                           <ul class="ps-3 mb-0">
-                            <li class="mb-1">Minimum 8 characters long - the more, the better</li>
-                            <li class="mb-1">At least one lowercase character</li>
-                            <li>At least one number, symbol, or whitespace character</li>
+                            <li id="lengthReq" class="mb-1">❌ Minimum 8 characters long</li>
+                            <li id="lowercaseReq" class="mb-1">❌ At least one lowercase character</li>
+                            <li id="uppercaseReq" class="mb-1">❌ At least one uppercase character</li>
+                            <li id="numberReq" class="mb-1">❌ At least one numeric character</li>
+                            <li id="specialCharReq">❌ At least one special character</li>
+                            <li id="matchReq" class="mt-2">❌ Passwords must match</li>
                           </ul>
                         </div>
+
                         <div>
                           <button type="submit" class="btn btn-primary me-2">Save changes</button>
                           <button type="reset" class="btn btn-label-secondary">Cancel</button>
                         </div>
                       </div>
                     </form>
+
+                    <script>
+                      // Show/Hide Password
+                      function togglePassword(fieldId, icon) {
+                        const passwordField = document.getElementById(fieldId);
+                        if (passwordField.type === "password") {
+                          passwordField.type = "text";
+                          icon.innerHTML = '<i class="ti ti-eye"></i>';
+                        } else {
+                          passwordField.type = "password";
+                          icon.innerHTML = '<i class="ti ti-eye-off"></i>';
+                        }
+                      }
+
+                      // Password Validation
+                      function validatePassword() {
+                        const newPassword = document.getElementById("newPassword").value;
+                        const confirmPassword = document.getElementById("confirmPassword").value;
+
+                        const lengthReq = document.getElementById("lengthReq");
+                        const lowercaseReq = document.getElementById("lowercaseReq");
+                        const uppercaseReq = document.getElementById("uppercaseReq");
+                        const numberReq = document.getElementById("numberReq");
+                        const specialCharReq = document.getElementById("specialCharReq");
+                        const matchReq = document.getElementById("matchReq");
+
+                        const hasLowercase = /[a-z]/.test(newPassword);
+                        const hasUppercase = /[A-Z]/.test(newPassword);
+                        const hasNumber = /\d/.test(newPassword);
+                        const hasSpecialChar = /[\W_]/.test(newPassword);
+                        const isLongEnough = newPassword.length >= 8;
+                        const passwordsMatch = newPassword === confirmPassword;
+
+                        lengthReq.innerHTML = isLongEnough ? "✅ Minimum 8 characters long" : "❌ Minimum 8 characters long";
+                        lowercaseReq.innerHTML = hasLowercase ? "✅ At least one lowercase character" : "❌ At least one lowercase character";
+                        uppercaseReq.innerHTML = hasUppercase ? "✅ At least one uppercase character" : "❌ At least one uppercase character";
+                        numberReq.innerHTML = hasNumber ? "✅ At least one numeric character" : "❌ At least one numeric character";
+                        specialCharReq.innerHTML = hasSpecialChar ? "✅ At least one special character" : "❌ At least one special character";
+                        matchReq.innerHTML = passwordsMatch ? "✅ Passwords must match" : "❌ Passwords must match";
+
+                        document.getElementById("newPassword").setCustomValidity(isLongEnough && hasLowercase && hasUppercase && hasNumber && hasSpecialChar ? "" : "Password does not meet the security requirements.");
+                        document.getElementById("confirmPassword").setCustomValidity(passwordsMatch ? "" : "Passwords do not match.");
+                      }
+
+                      // Bootstrap Form Validation
+                      (function () {
+                        "use strict";
+                        const forms = document.querySelectorAll(".needs-validation");
+                        Array.from(forms).forEach(function (form) {
+                          form.addEventListener("submit", function (event) {
+                            if (!form.checkValidity()) {
+                              event.preventDefault();
+                              event.stopPropagation();
+                            }
+                            form.classList.add("was-validated");
+                          }, false);
+                        });
+                      })();
+                    </script>
+
+
+
+                    <!-- <script>
+                      function validatePassword() {
+                        const password = document.getElementById("newPassword").value;
+                        const confirmPassword = document.getElementById("confirmPassword").value;
+
+                        document.getElementById("lengthReq").innerHTML = password.length >= 8 ? "✔ Minimum 8 characters long" : "❌ Minimum 8 characters long";
+                        document.getElementById("lowercaseReq").innerHTML = /[a-z]/.test(password) ? "✔ At least one lowercase character" : "❌ At least one lowercase character";
+                        document.getElementById("uppercaseReq").innerHTML = /[A-Z]/.test(password) ? "✔ At least one uppercase character" : "❌ At least one uppercase character";
+                        document.getElementById("numberReq").innerHTML = /[0-9]/.test(password) ? "✔ At least one numeric character" : "❌ At least one numeric character";
+                        document.getElementById("specialCharReq").innerHTML = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password) ? "✔ At least one special character" : "❌ At least one special character";
+                        document.getElementById("matchReq").innerHTML = password && confirmPassword && password === confirmPassword ? "✔ Passwords match" : "❌ Passwords must match";
+                      }
+
+                      function togglePassword(fieldId, iconElement) {
+                        const passwordField = document.getElementById(fieldId);
+                        if (passwordField.type === "password") {
+                          passwordField.type = "text";
+                          iconElement.innerHTML = '<i class="ti ti-eye"></i>';
+                        } else {
+                          passwordField.type = "password";
+                          iconElement.innerHTML = '<i class="ti ti-eye-off"></i>';
+                        }
+                      }
+                    </script> -->
                   </div>
                 </div>
 
+                <script>
+                  document.addEventListener("DOMContentLoaded", function () {
+                    // Get URL parameters
+                    const urlParams = new URLSearchParams(window.location.search);
 
+                    if (urlParams.has('changePass')) {
+                      if (urlParams.get('changePass') === "currPassWrong") {
+                        Swal.fire({
+                          icon: "error",
+                          title: "Ooops! Error Changing Password.",
+                          text: "Current Password doesnt match. Please Try Again.",
+                          customClass: {
+                            confirmButton: "btn btn-primary"
+                          },
+                          buttonsStyling: false
+                        });
+                      } else if (urlParams.get('changePass') === "success") {
+                        Swal.fire({
+                          icon: "success",
+                          title: "Success!",
+                          text: "Password Changed Succesfully.",
+                          customClass: {
+                            confirmButton: "btn btn-primary"
+                          },
+                          buttonsStyling: false
+                        });
+                      } else if (urlParams.get('changePass') === "error") {
+                        Swal.fire({
+                          icon: "error",
+                          title: "Ooops! Error Changing Password.",
+                          text: "There was a problem changing password. Please Contact Administrator.",
+                          customClass: {
+                            confirmButton: "btn btn-primary"
+                          },
+                          buttonsStyling: false
+                        });
+                      }
+                    }
+
+                    // Remove 'mail=success' or 'mail=error' from the URL after showing the alert
+                    history.replaceState(null, "", window.location.pathname);
+                  }
+                  );
+                </script>
 
                 <!-- Recent Devices -->
                 <div class="card mb-4">
@@ -153,6 +364,7 @@ if (!isset($_SESSION['user_id'])) {
                         <tr>
                           <th class="text-truncate">Browser</th>
                           <th class="text-truncate">Device</th>
+                          <th class="text-truncate">IP Address</th>
                           <th class="text-truncate">Location</th>
                           <th class="text-truncate">Recent Activities</th>
                         </tr>
@@ -162,7 +374,7 @@ if (!isset($_SESSION['user_id'])) {
                         // Fetch login history from the database
                         include 'php/db_connection.php';
                         $user_id = $_SESSION['user_id']; // Ensure user is logged in
-                        $sql = "SELECT browser, device, location, login_time FROM login_devices WHERE user_id = ? ORDER BY login_time DESC";
+                        $sql = "SELECT browser, device, location, ip_address, login_time FROM login_devices WHERE user_id = ? ORDER BY login_time DESC";
                         $stmt = $conn->prepare($sql);
                         $stmt->bind_param("i", $user_id);
                         $stmt->execute();
@@ -189,8 +401,10 @@ if (!isset($_SESSION['user_id'])) {
                     <span class='fw-medium'>{$row['browser']}</span>
                 </td>
                 <td class='text-truncate'>{$row['device']}</td>
+                <td class='text-truncate'>{$row['ip_address']}</td>
                 <td class='text-truncate'>{$row['location']}</td>
                 <td class='text-truncate'>" . date("F j, Y \\a\\t g:i A", strtotime($row['login_time'])) . "</td>
+                   
             </tr>";
                           }
                         } else {
@@ -207,12 +421,41 @@ if (!isset($_SESSION['user_id'])) {
                     </table>
                   </div>
                 </div>
+
+
                 <!--/ Recent Devices -->
+
+                <script>
+                  document.addEventListener("DOMContentLoaded", function () {
+                    // Get URL parameters
+                    const urlParams = new URLSearchParams(window.location.search);
+
+                    if (urlParams.has('loginstatus')) {
+                      if (urlParams.get('loginstatus') === "success") {
+                        Swal.fire({
+                          icon: "success",
+                          title: "Magandang GensanMed!",
+                          text: "Login Succesful",
+                          customClass: {
+                            confirmButton: "btn btn-primary"
+                          },
+                          buttonsStyling: false
+                        });
+                      }
+                    }
+
+                    // Remove 'mail=success' or 'mail=error' from the URL after showing the alert
+                    history.replaceState(null, "", window.location.pathname);
+                  }
+                  );
+                </script>
               </div>
             </div>
           </div>
           <!-- / Content -->
-
+          <?php
+          include 'include/logoutModal.php';
+          ?>
           <!-- Footer -->
           <?php
           include 'include/footer.php';
@@ -234,32 +477,6 @@ if (!isset($_SESSION['user_id'])) {
   </div>
   <!-- / Layout wrapper -->
 
-  <!-- Core JS -->
-  <!-- build:js assets/vendor/js/core.js -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Get URL parameters
-      const urlParams = new URLSearchParams(window.location.search);
-
-      if (urlParams.has('loginstatus')) {
-        if (urlParams.get('loginstatus') === "success") {
-          Swal.fire({
-            icon: "success",
-            title: "Magandang GensanMed!",
-            text: "Login Succesful",
-            customClass: {
-              confirmButton: "btn btn-primary"
-            },
-            buttonsStyling: false
-          });
-        }
-      }
-
-      // Remove 'mail=success' or 'mail=error' from the URL after showing the alert
-      history.replaceState(null, "", window.location.pathname);
-    }
-    );
-  </script>
   <script src="../../assets/vendor/libs/jquery/jquery.js"></script>
   <script src="../../assets/vendor/libs/popper/popper.js"></script>
   <script src="../../assets/vendor/js/bootstrap.js"></script>
@@ -268,22 +485,24 @@ if (!isset($_SESSION['user_id'])) {
   <script src="../../assets/vendor/libs/hammer/hammer.js"></script>
   <script src="../../assets/vendor/libs/i18n/i18n.js"></script>
   <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
-  <script src="../../assets/vendor/js/menu.js"></script>
 
   <!-- endbuild -->
 
+
   <!-- Vendors JS -->
-  <script src="../../assets/vendor/libs/select2/select2.js"></script>
+  <script src="../../assets/vendor/libs/moment/moment.js"></script>
   <script src="../../assets/vendor/libs/@form-validation/popular.js"></script>
   <script src="../../assets/vendor/libs/@form-validation/bootstrap5.js"></script>
   <script src="../../assets/vendor/libs/@form-validation/auto-focus.js"></script>
   <script src="../../assets/vendor/libs/cleavejs/cleave.js"></script>
   <script src="../../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-
-
+  <script src="../../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+  <!-- Main JS -->
+  <script src="../../assets/js/main.js"></script>
   <!-- Page JS -->
   <script src="../../assets/js/pages-account-settings-security.js"></script>
   <script src="../../assets/js/modal-enable-otp.js"></script>
+  <script src="../../assets/js/extended-ui-sweetalert2.js"></script>
 </body>
 
 </html>

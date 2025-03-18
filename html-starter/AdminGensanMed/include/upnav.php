@@ -1,3 +1,19 @@
+<?php
+include 'db_connection.php';
+
+$user_id = $_SESSION['user_id']; // Make sure user is logged in
+
+$stmt = $conn->prepare("SELECT username, profile_picture FROM users WHERE user_id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+$stmt->close();
+$conn->close();
+
+$imgPath = "../../html-starter/AdminGensanMed/php/" . $user["profile_picture"];
+?>
+
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
     id="layout-navbar">
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -38,36 +54,41 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="php/Images/Profile/mr-bubz.gif" alt class="h-auto rounded-circle" />
+                        <img src="<?php echo htmlspecialchars($imgPath); ?>" alt class=" h-auto rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
+
+
                     <li>
                         <a class="dropdown-item" href="#">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="php/Images/Profile/mr-bubz.gif" alt class="h-auto rounded-circle" />
+                                        <img src="<?php echo htmlspecialchars($imgPath); ?>" alt="Profile Picture"
+                                            class="h-auto rounded-circle" />
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-medium d-block">Hatdogie</span>
+                                    <span
+                                        class="fw-medium d-block"><?php echo htmlspecialchars($user['username']); ?></span>
                                     <small class="text-muted">Admin</small>
                                 </div>
                             </div>
                         </a>
                     </li>
+
                     <li>
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="Profile.php">
                             <i class="ti ti-user-check me-2 ti-sm"></i>
                             <span class="align-middle">My Profile</span>
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="Settings.php">
                             <i class="ti ti-settings me-2 ti-sm"></i>
                             <span class="align-middle">Settings</span>
                         </a>

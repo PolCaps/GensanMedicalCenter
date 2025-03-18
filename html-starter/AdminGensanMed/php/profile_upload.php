@@ -1,6 +1,6 @@
 <?php
 
-include 'include/db_connection.php';
+include '../include/db_connection.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_POST['user_id'];
@@ -51,14 +51,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
 
-        $updateStmt = $conn->prepare("UPDATE users SET email = ?, contact_number = ?, profile_picture = ? WHERE user_id = ?");
-        $updateStmt->bind_param("ssss", $email, $phoneNumber, $profileImage, $userId);
+        $updateStmt = $conn->prepare("UPDATE users SET email = ?, username = ?, contact_number = ?, profile_picture = ? WHERE user_id = ?");
+        $updateStmt->bind_param("sssss", $email, $username, $phoneNumber, $profileImage, $userId);
 
         if ($updateStmt->execute()) {
-            header("Location: ../Profile.php?uploadStatus=success");
+            header("Location: ../Profile.php?updateStatus=success");
             exit();
         } else {
-            die("Update failed: " . $updateStmt->error);
+            header("Location: ../Profile.php?updateStatus=error");
+            exit();
         }
 
         $updateStmt->close();

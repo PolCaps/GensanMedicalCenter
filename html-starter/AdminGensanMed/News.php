@@ -15,13 +15,11 @@ if (!isset($_SESSION['user_id'])) {
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-  <title>GenMed | Leadership</title>
+  <title>GenMed | News</title>
 
   <meta name="description" content="" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="../../assets/img/favicon/favicon.ico" />
-
+  <link rel="icon" href="../../assets/GMC_Photos/logo.png" type="image/x-icon" />
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -77,9 +75,70 @@ if (!isset($_SESSION['user_id'])) {
     <div class="layout-container">
       <!-- Menu -->
 
-      <?php
-      include 'include/aside.php';
-      ?>
+      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <div class="app-brand demo">
+          <a href="Dashboard.php" class="app-brand-link">
+            <span class="app-brand-logo demo">
+              <img src="../../assets/GMC_Photos/logo.png" alt="Logo" width="25px" height="25px">
+            </span>
+            <span class="app-brand-text demo menu-text fw-bold text-success px-4">Menu</span>
+          </a>
+
+          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+            <i class="ti menu-toggle-icon d-none d-xl-block ti-sm align-middle" data-bs-toggle="tooltip"
+              data-bs-placement="right" title="Fixed Sidebar"></i>
+            <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
+          </a>
+        </div>
+
+        <div class="menu-inner-shadow"></div>
+
+        <ul class="menu-inner py-1">
+          <!-- Page -->
+          <li class="menu-item">
+            <a href="Dashboard.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-tada-hover ti-smart-home"></i>
+              <div data-i18n="Page 1">Dashboard</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Collaboration.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-heart-handshake"></i>
+              <div data-i18n="Page 2">Collaborations</div>
+            </a>
+          </li>
+          <li class="menu-item active">
+            <a href="News.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-speakerphone"></i>
+              <div data-i18n="Page 2">News</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Leadership.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-user-star"></i>
+              <div data-i18n="Page 2">Leadership</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Doctors.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-user-heart"></i>
+              <div data-i18n="Page 2">Physicians</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Archive.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-archive"></i>
+              <div data-i18n="Page 2">Archive</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="Profile.php" class="menu-link">
+              <i class="menu-icon tf-icons ti ti-settings"></i>
+              <div data-i18n="Page 2">Account Setting</div>
+            </a>
+          </li>
+        </ul>
+      </aside>
       <!-- / Menu -->
 
       <!-- Layout container -->
@@ -120,7 +179,7 @@ if (!isset($_SESSION['user_id'])) {
                         <textarea class="form-control" name="title" id="titleInput" rows="2"
                           placeholder="Enter title (Max: 100 characters)" maxlength="100" required></textarea>
                         <small class="text-muted"><span id="titleCounter">0</span>/100 characters</small>
-                        <div class="invalid-feedback">Title must be between atleast #4A4A4A100 characters.</div>
+                        <div class="invalid-feedback">Title must be between atleast 100 characters.</div>
                       </div>
 
                       <!-- Short Summary (Textarea) with Counter -->
@@ -236,36 +295,6 @@ if (!isset($_SESSION['user_id'])) {
         <!-- / Navbar -->
 
 
-        <?php
-        include 'php/db_connection.php';
-
-        // Initialize counts
-        $totalLeaders = $directors = $administration = $medservice = 0;
-
-        // Query to fetch leader counts
-        $sql = "SELECT type, COUNT(*) as count FROM leaderships WHERE status = 'active' GROUP BY type";
-        $result = $conn->query($sql);
-
-        // Process the query results
-        if ($result->num_rows > 0) {
-          while ($row = $result->fetch_assoc()) {
-            $totalLeaders += $row["count"]; // Sum total leaders
-            switch ($row["type"]) {
-              case "directors":
-                $directors = $row["count"];
-                break;
-              case "administration":
-                $administration = $row["count"];
-                break;
-              case "medservice":
-                $medservice = $row["count"];
-                break;
-            }
-          }
-        }
-
-        $conn->close();
-        ?>
 
 
         <div class="content-wrapper">
@@ -274,16 +303,26 @@ if (!isset($_SESSION['user_id'])) {
           <div class="container-xxl flex-grow-1 container-p-y">
             <!-- <h4 class="py-3 mb-4"><span class="text-muted fw-light">Academy/</span> My Courses</h4> -->
 
+
+            <?php
+            include 'php/db_connection.php';
+
+            $total_news = $conn->query("SELECT COUNT(*) AS total FROM news")->fetch_assoc()['total'];
+            $active_news = $conn->query("SELECT COUNT(*) AS active FROM news WHERE status = 'active'")->fetch_assoc()['active'];
+            $archived_news = $conn->query("SELECT COUNT(*) AS archived FROM news WHERE status = 4")->fetch_assoc()['archived'];
+
+            $conn->close();
+            ?>
             <div class="app-academy">
               <div class="row mb-4 g-4">
 
-                <div class="col-sm-6 col-xl-3">
+                <div class="col-sm-6 col-xl-4">
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex align-items-center justify-content-between">
                         <div class="content-left">
-                          <h4 class="mb-0"><?php echo $totalLeaders; ?></h4>
-                          <small>Total Leaders</small>
+                          <h4 class="mb-0"><?php echo $total_news; ?></h4>
+                          <small>Overall News Published</small>
                         </div>
                         <span class="badge bg-label-primary rounded-circle p-2">
                           <i class="ti ti-currency-dollar ti-md"></i>
@@ -293,13 +332,13 @@ if (!isset($_SESSION['user_id'])) {
                   </div>
                 </div>
 
-                <div class="col-sm-6 col-xl-3">
+                <div class="col-sm-6 col-xl-4">
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex align-items-center justify-content-between">
                         <div class="content-left">
-                          <h4 class="mb-0"><?php echo $directors; ?></h4>
-                          <small>Board of Directors</small>
+                          <h4 class="mb-0"><?php echo $active_news; ?></h4>
+                          <small>Active News</small>
                         </div>
                         <span class="badge bg-label-success rounded-circle p-2">
                           <i class="ti ti-gift ti-md"></i>
@@ -309,13 +348,13 @@ if (!isset($_SESSION['user_id'])) {
                   </div>
                 </div>
 
-                <div class="col-sm-6 col-xl-3">
+                <div class="col-sm-6 col-xl-4">
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex align-items-center justify-content-between">
                         <div class="content-left">
-                          <h4 class="mb-0"><?php echo $administration; ?></h4>
-                          <small>Administrations</small>
+                          <h4 class="mb-0"><?php echo $archived_news; ?></h4>
+                          <small>Archived</small>
                         </div>
                         <span class="badge bg-label-danger rounded-circle p-2">
                           <i class="ti ti-user ti-md"></i>
@@ -325,21 +364,6 @@ if (!isset($_SESSION['user_id'])) {
                   </div>
                 </div>
 
-                <div class="col-sm-6 col-xl-3">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="content-left">
-                          <h4 class="mb-0"><?php echo $medservice; ?></h4>
-                          <small>Medical Services</small>
-                        </div>
-                        <span class="badge bg-label-info rounded-circle p-2">
-                          <i class="ti ti-infinity ti-md"></i>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
 
               <div class="card mb-4">
@@ -355,13 +379,8 @@ if (!isset($_SESSION['user_id'])) {
                   </div>
 
                   <div class="d-flex justify-content-md-end align-items-center gap-3">
-                    <input type="search" id="searchLeader" placeholder="Find your leader" class="form-control me-2" />
-                    <select id="filterLeadership" class="select2 form-select">
-                      <option value="*">All Leadership</option>
-                      <option value="directors">Board of Directors</option>
-                      <option value="administration">Administrations</option>
-                      <option value="medservice">Medical Services</option>
-                    </select>
+                    <input type="search" id="searchNews" placeholder="Find Published News" class="form-control me-2" />
+
 
                   </div>
                 </div>
@@ -382,18 +401,18 @@ if (!isset($_SESSION['user_id'])) {
                         $summary = $row["summary"];
                         $status = $row["status"];
 
-                        echo '<div class="col-sm-6 col-lg-4 leader-card" data-type="">';
+                        echo '<div class="col-sm-6 col-lg-4 news-card" data-type="">';
                         echo '  <div class="card p-2 h-100 shadow-none border">';
                         echo '    <div class="rounded-2 text-center mb-3">';
                         echo '      <img class="img-fluid" src="' . htmlspecialchars($imgPath) . '" alt="News Image" />';
                         echo '    </div>';
                         echo '    <div class="card-body p-3 pt-2">';
-                        echo '      <h5 class="h5 leader-name">Title: ' . htmlspecialchars($title) . '</h5>';
+                        echo '      <h5 class="h5 news-title">Title: ' . htmlspecialchars($title) . '</h5>';
 
                         // Summary paragraph fix
-                        echo '      <p class="mt-2">Summary: ' . htmlspecialchars($summary) . '</p>';
+                        echo '      <p class="mt-2 news-summary">Summary: ' . htmlspecialchars($summary) . '</p>';
 
-                        echo '      <div class="justify-content-between align-items-center mb-3">';
+                        echo '      <div class="justify-content-between align-items-center mb-3 news-date">';
                         echo '<p>Date Published: ' . date("F j, Y g:i A", strtotime($datepublished)) . '</p>';
 
 
@@ -448,28 +467,15 @@ if (!isset($_SESSION['user_id'])) {
                     <script>
                       $(document).ready(function () {
                         // Search Functionality
-                        $("#searchLeader").on("keyup", function () {
+                        $("#searchNews").on("keyup", function () {
                           let searchText = $(this).val().toLowerCase();
 
-                          $(".leader-card").each(function () {
-                            let leaderName = $(this).find(".leader-name").text().toLowerCase();
+                          $(".news-card").each(function () {
+                            let newsTitle = $(this).find(".news-title").text().toLowerCase();
+                            let newsSum = $(this).find(".news-summary").text().toLowerCase();
+                            let newsDate = $(this).find(".news-date").text().toLowerCase();
 
-                            if (leaderName.includes(searchText)) {
-                              $(this).show();
-                            } else {
-                              $(this).hide();
-                            }
-                          });
-                        });
-
-                        // Dropdown Filter
-                        $("#filterLeadership").on("change", function () {
-                          let selectedCategory = $(this).val();
-
-                          $(".leader-card").each(function () {
-                            let leaderType = $(this).data("type");
-
-                            if (selectedCategory === "*" || leaderType === selectedCategory) {
+                            if (newsTitle.includes(searchText) || newsSum.includes(searchText) || newsDate.includes(searchText)) {
                               $(this).show();
                             } else {
                               $(this).hide();
@@ -478,6 +484,7 @@ if (!isset($_SESSION['user_id'])) {
                         });
                       });
                     </script>
+
                     <?php
                     include 'include/logoutModal.php';
                     ?>
