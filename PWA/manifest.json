@@ -53,7 +53,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "../html/GensanMed/landing-page.php",
+  "start_url": "../landing-page.php",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000"
