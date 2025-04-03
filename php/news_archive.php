@@ -15,24 +15,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ii", $status, $id); // Correct parameter binding
 
             if ($stmt->execute()) {
-                header("Location: ../NewsUpdate.php?archiveStatus=Success");
+                header("Location: ../admin/NewsUpdate.php?archiveStatus=Success");
                 exit();
             } else {
-                header("Location: ../NewsUpdate.php?archiveStatus=Failed");
+                header("Location: ../admin/NewsUpdate.php?archiveStatus=Failed");
                 exit();
             }
 
             $stmt->close();
         } else {
-            header("Location: ../NewsUpdate.php?archiveStatus=StmtError");
+            header("Location: ../admin/NewsUpdate.php?archiveStatus=StmtError");
             exit();
         }
     } else {
-        header("Location: ../NewsUpdate.php?archiveStatus=Invalid");
+        header("Location: ../admin/NewsUpdate.php?archiveStatus=Invalid");
         exit();
     }
 } else {
-    header("Location: ../NewsUpdate.php");
+    header("Location: ../admin/NewsUpdate.php");
     exit();
 }
 

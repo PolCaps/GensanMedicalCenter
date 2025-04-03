@@ -11,7 +11,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <a href="include/logout.php" class="btn btn-danger">Yes, Logout</a>
+                <a href="../include/logout.php" class="btn btn-danger">Yes, Logout</a>
             </div>
         </div>
     </div>

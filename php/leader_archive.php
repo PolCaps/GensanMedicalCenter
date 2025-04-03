@@ -11,19 +11,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt->execute()) {
 
-            header("Location: ../Leadership.php?archiveStatus=archiveSuccess");
+            header("Location: ../admin/Leadership.php?archiveStatus=archiveSuccess");
             exit();
         } else {
 
-            header("Location: ../Leadership.php?archiveStatus=archiveFailed");
+            header("Location: ../admin/Leadership.php?archiveStatus=archiveFailed");
             exit();
         }
     } else {
-        header("Location: ../Leadership.php?archiveStatus=archiveInvalid");
+        header("Location: ../admin/Leadership.php?archiveStatus=archiveInvalid");
         exit();
     }
 } else {
-    header("Location: ../Leadership.php");
+    header("Location: ../admin/Leadership.php");
     exit();
 }
 

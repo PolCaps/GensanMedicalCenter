@@ -1,6 +1,6 @@
 <?php
 header("Content-Type: application/json");
-include 'php/db_connection.php';
+include '../php/db_connection.php';
 
 $response = [
     "total" => 0,

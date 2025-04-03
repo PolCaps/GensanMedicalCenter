@@ -11,19 +11,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt->execute()) {
 
-            header("Location: ../Doctors.php?archiveStatus=archiveSuccess");
+            header("Location: ../admin/Doctors.php?archiveStatus=archiveSuccess");
             exit();
         } else {
 
-            header("Location: ../Doctors.php?archiveStatus=archiveFailed");
+            header("Location: ../admin/Doctors.php?archiveStatus=archiveFailed");
             exit();
         }
     } else {
-        header("Location: ../Doctors.php?archiveStatus=archiveInvalid");
+        header("Location: ../admin/Doctors.php?archiveStatus=archiveInvalid");
         exit();
     }
 } else {
-    header("Location: ../Doctors.php");
+    header("Location: ../admin/Doctors.php");
     exit();
 }
 

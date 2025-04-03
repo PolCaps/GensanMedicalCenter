@@ -214,7 +214,7 @@
               $fullName .= ', ' . $row['title'];
             }
 
-            $logoPath = "html-starter/AdminGensanMed/php/" . $row["image"];
+            $logoPath = "php/" . $row["image"];
             echo '
         <div class="col-lg-3 col-sm-6">
           <div class="card mt-3 mb-3 mt-lg-0 shadow-none">

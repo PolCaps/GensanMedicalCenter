@@ -2,6 +2,6 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: ../AdminLogin.php");
+header("Location: ../admin/AdminLogin.php");
 exit();
 ?>

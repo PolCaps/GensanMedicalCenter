@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact" dir="ltr"
-  data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template-starter">
+  data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-starter">
 
 <head>
   <meta charset="utf-8" />
@@ -20,7 +20,7 @@ if (!isset($_SESSION['user_id'])) {
   <meta name="description" content="" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="assets/img/favicon/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -29,31 +29,31 @@ if (!isset($_SESSION['user_id'])) {
     href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/vendor/fonts/tabler-icons.css" />
+  <link rel="stylesheet" href="../assets/vendor/fonts/tabler-icons.css" />
   <!-- <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" /> -->
   <!-- <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" /> -->
   <!-- Core CSS -->
-  <link rel="stylesheet" href="assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-  <link rel="stylesheet" href="assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="assets/css/demo.css" />
+  <link rel="stylesheet" href="../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="../assets/css/demo.css" />
 
   <!-- Vendors CSS -->
-  <link rel="stylesheet" href="assets/vendor/libs/node-waves/node-waves.css" />
-  <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="assets/vendor/libs/typeahead-js/typeahead.css" />
-  <link rel="stylesheet" href="assets/vendor/libs/select2/select2.css" />
-  <link rel="stylesheet" href="assets/vendor/libs/@form-validation/form-validation.css" />
-  <link rel="stylesheet" href="assets/vendor/libs/sweetalert2/sweetalert2.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/node-waves/node-waves.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/typeahead-js/typeahead.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/select2/select2.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/@form-validation/form-validation.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
   <!-- Page CSS -->
-  <link rel="stylesheet" href="assets/vendor/css/pages/page-account-settings.css" />
+  <link rel="stylesheet" href="../assets/vendor/css/pages/page-account-settings.css" />
   <!-- Helpers -->
-  <script src="assets/vendor/js/helpers.js"></script>
+  <script src="../assets/vendor/js/helpers.js"></script>
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-  <script src="assets/vendor/js/template-customizer.js"></script>
+  <script src="../assets/vendor/js/template-customizer.js"></script>
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-  <script src="assets/js/config.js"></script>
+  <script src="../assets/js/config.js"></script>
 </head>
 
 <body>
@@ -66,7 +66,7 @@ if (!isset($_SESSION['user_id'])) {
         <div class="app-brand demo">
           <a href="Dashboard.php" class="app-brand-link">
             <span class="app-brand-logo demo">
-              <img src="assets/GMC_Photos/logo.png" alt="Logo" width="25px" height="25px">
+              <img src="../assets/GMC_Photos/logo.png" alt="Logo" width="25px" height="25px">
             </span>
             <span class="app-brand-text demo menu-text fw-bold text-success px-4">Menu</span>
           </a>
@@ -133,7 +133,7 @@ if (!isset($_SESSION['user_id'])) {
         <!-- Navbar -->
 
         <?php
-        include 'include/upnav.php';
+        include '../include/upnav.php';
         ?>
         <!-- / Navbar -->
 
@@ -159,7 +159,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="card mb-4">
                   <h5 class="card-header">Change Password</h5>
                   <div class="card-body">
-                    <form action="php/change_password.php" method="POST" class="needs-validation" novalidate>
+                    <form action="../php/change_password.php" method="POST" class="needs-validation" novalidate>
                       <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_id']; ?>">
 
                       <div class="row">
@@ -372,7 +372,7 @@ if (!isset($_SESSION['user_id'])) {
                       <tbody class="table-border-bottom-0">
                         <?php
                         // Fetch login history from the database
-                        include 'php/db_connection.php';
+                        include '../php/db_connection.php';
                         $user_id = $_SESSION['user_id']; // Ensure user is logged in
                         $sql = "SELECT browser, device, location, ip_address, login_time FROM login_devices WHERE user_id = ? ORDER BY login_time DESC";
                         $stmt = $conn->prepare($sql);
@@ -454,11 +454,11 @@ if (!isset($_SESSION['user_id'])) {
           </div>
           <!-- / Content -->
           <?php
-          include 'include/logoutModal.php';
+          include '../include/logoutModal.php';
           ?>
           <!-- Footer -->
           <?php
-          include 'include/footer.php';
+          include '../include/footer.php';
           ?>
           <!-- / Footer -->
 
@@ -477,32 +477,32 @@ if (!isset($_SESSION['user_id'])) {
   </div>
   <!-- / Layout wrapper -->
 
-  <script src="assets/vendor/libs/jquery/jquery.js"></script>
-  <script src="assets/vendor/libs/popper/popper.js"></script>
-  <script src="assets/vendor/js/bootstrap.js"></script>
-  <script src="assets/vendor/libs/node-waves/node-waves.js"></script>
-  <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-  <script src="assets/vendor/libs/hammer/hammer.js"></script>
-  <script src="assets/vendor/libs/i18n/i18n.js"></script>
-  <script src="assets/vendor/libs/typeahead-js/typeahead.js"></script>
+  <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="../assets/vendor/libs/popper/popper.js"></script>
+  <script src="../assets/vendor/js/bootstrap.js"></script>
+  <script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
+  <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="../assets/vendor/libs/hammer/hammer.js"></script>
+  <script src="../assets/vendor/libs/i18n/i18n.js"></script>
+  <script src="../assets/vendor/libs/typeahead-js/typeahead.js"></script>
 
   <!-- endbuild -->
 
 
   <!-- Vendors JS -->
-  <script src="assets/vendor/libs/moment/moment.js"></script>
-  <script src="assets/vendor/libs/@form-validation/popular.js"></script>
-  <script src="assets/vendor/libs/@form-validation/bootstrap5.js"></script>
-  <script src="assets/vendor/libs/@form-validation/auto-focus.js"></script>
-  <script src="assets/vendor/libs/cleavejs/cleave.js"></script>
-  <script src="assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-  <script src="assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+  <script src="../assets/vendor/libs/moment/moment.js"></script>
+  <script src="../assets/vendor/libs/@form-validation/popular.js"></script>
+  <script src="../assets/vendor/libs/@form-validation/bootstrap5.js"></script>
+  <script src="../assets/vendor/libs/@form-validation/auto-focus.js"></script>
+  <script src="../assets/vendor/libs/cleavejs/cleave.js"></script>
+  <script src="../assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+  <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
   <!-- Main JS -->
-  <script src="assets/js/main.js"></script>
+  <script src="../assets/js/main.js"></script>
   <!-- Page JS -->
-  <script src="assets/js/pages-account-settings-security.js"></script>
-  <script src="assets/js/modal-enable-otp.js"></script>
-  <script src="assets/js/extended-ui-sweetalert2.js"></script>
+  <script src="../assets/js/pages-account-settings-security.js"></script>
+  <script src="../assets/js/modal-enable-otp.js"></script>
+  <script src="../assets/js/extended-ui-sweetalert2.js"></script>
 </body>
 
 </html>

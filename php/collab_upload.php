@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bind_param("sss", $categoryTitle, $description, $targetFilePath);
 
                 if ($stmt->execute()) {
-                    header("Location: ../Collaboration.php?uploadStatus=success");
+                    header("Location: ../admin/Collaboration.php?uploadStatus=success");
                     exit();
                 } else {
                     echo json_encode(["status" => "error", "message" => "Database insert failed."]);
@@ -31,11 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $stmt->close();
             } else {
-                header("Location: ../Collaboration.php?uploadStatus=error");
+                header("Location: ../admin/Collaboration.php?uploadStatus=error");
                 exit();
             }
         } else {
-            header("Location: ../Collaboration.php?uploadStatus=errorFileType");
+            header("Location: ../admin/Collaboration.php?uploadStatus=errorFileType");
             exit();
         }
     } else {

@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validate required fields
     if (empty($collab_id) || empty($title) || empty($description)) {
-        header("Location: ../Collaboration.php?updateStatus=missingFields");
+        header("Location: ../admin/Collaboration.php?updateStatus=missingFields");
         exit();
     }
 
@@ -38,11 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
                 $logoPath = $targetFilePath; // Store file path in database
             } else {
-                header("Location: ../Collaboration.php?updateStatus=updateError");
+                header("Location: ../admin/Collaboration.php?updateStatus=updateError");
                 exit();
             }
         } else {
-            header("Location: ../Collaboration.php?updateStatus=updateError");
+            header("Location: ../admin/Collaboration.php?updateStatus=updateError");
             exit();
         }
     }
@@ -66,10 +66,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssi", $title, $description, $logoPath, $status, $collab_id);
 
     if ($stmt->execute()) {
-        header("Location: ../Collaboration.php?updateStatus=updateSuccess");
+        header("Location: ../admin/Collaboration.php?updateStatus=updateSuccess");
         exit();
     } else {
-        header("Location: ../Collaboration.php?updateStatus=error");
+        header("Location: ../admin/Collaboration.php?updateStatus=error");
         exit();
     }
 

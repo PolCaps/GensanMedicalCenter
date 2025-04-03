@@ -29,22 +29,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bind_param("ssssss", $specialty, $clinicAddress, $firstName, $middleName, $lastName, $targetFilePath);
 
                 if ($stmt->execute()) {
-                    header("Location: ../Doctors.php?doctorStatus=success");
+                    header("Location: ../admin/Doctors.php?doctorStatus=success");
                     exit();
                 } else {
                     echo json_encode(["status" => "error", "message" => "Database insert failed."]);
                 }
                 $stmt->close();
             } else {
-                header("Location: ../Doctors.php?doctorStatus=error");
+                header("Location: ../admin/Doctors.php?doctorStatus=error");
                 exit();
             }
         } else {
-            header("Location: ../Doctors.php?doctorStatus=invalid");
+            header("Location: ../admin/Doctors.php?doctorStatus=invalid");
             exit();
         }
     } else {
-        header("Location: ../Doctors.php?doctorStatus=no_file");
+        header("Location: ../admin/Doctors.php?doctorStatus=no_file");
         exit();
     }
 } else {

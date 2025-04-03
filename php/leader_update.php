@@ -46,11 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
                 $imagePath = $targetFilePath; // Update image path
             } else {
-                header("Location: ../Leadership.php?leaderupdateStatus=errorUpdate");
+                header("Location: ../admin/Leadership.php?leaderupdateStatus=errorUpdate");
                 exit();
             }
         } else {
-            header("Location: ../Leadership.php?leaderupdateStatus=invalidUpdate");
+            header("Location: ../admin/Leadership.php?leaderupdateStatus=invalidUpdate");
             exit();
         }
     }
@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     $conn->close();
 
-    header("Location: ../Leadership.php?leaderupdateStatus=successUpdate");
+    header("Location: ../admin/Leadership.php?leaderupdateStatus=successUpdate");
     exit();
 }
 ?>

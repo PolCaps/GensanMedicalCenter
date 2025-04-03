@@ -41,11 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
                 $imagePath = $targetFilePath; // Update image path if upload is successful
             } else {
-                header("Location: ../Doctors.php?doctorStatus=errorEdit");
+                header("Location: ../admin/Doctors.php?doctorStatus=errorEdit");
                 exit();
             }
         } else {
-            header("Location: ../Doctors.php?doctorStatus=invalidEdit");
+            header("Location: ../admin/Doctors.php?doctorStatus=invalidEdit");
             exit();
         }
     }
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssssi", $specialty, $clinicAddress, $firstName, $middleName, $lastName, $imagePath, $doctorId);
 
     if ($stmt->execute()) {
-        header("Location: ../Doctors.php?doctorStatus=successEdit");
+        header("Location: ../admin/Doctors.php?doctorStatus=successEdit");
         exit();
     } else {
         echo json_encode(["status" => "error", "message" => "Database update failed."]);

@@ -11,19 +11,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt->execute()) {
 
-            header("Location: ../Collaboration.php?archiveStatus=archiveSuccess");
+            header("Location: ../admin/Collaboration.php?archiveStatus=archiveSuccess");
             exit();
         } else {
 
-            header("Location: ../Collaboration.php?archiveStatus=archiveFailed");
+            header("Location: ../admin/Collaboration.php?archiveStatus=archiveFailed");
             exit();
         }
     } else {
-        header("Location: ../Collaboration.php?archiveStatus=archiveInvalid");
+        header("Location: ../admin/Collaboration.php?archiveStatus=archiveInvalid");
         exit();
     }
 } else {
-    header("Location: ../Collaboration.php");
+    header("Location: ../admin/Collaboration.php");
     exit();
 }
 

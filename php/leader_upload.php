@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bind_param("sssssss", $position, $type, $firstName, $middleName, $lastName, $postNominalTitles, $targetFilePath);
 
                 if ($stmt->execute()) {
-                    header("Location: ../Leadership.php?leaderStatus=success");
+                    header("Location: ../admin/Leadership.php?leaderStatus=success");
                     exit();
                 } else {
                     echo json_encode(["status" => "error", "message" => "Database insert failed."]);
@@ -40,11 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $stmt->close();
             } else {
-                header("Location: ../Leadership.php?leaderStatus=error");
+                header("Location: ../admin/Leadership.php?leaderStatus=error");
                 exit();
             }
         } else {
-            header("Location: ../Leadership.php?leaderStatus=invalid");
+            header("Location: ../admin/Leadership.php?leaderStatus=invalid");
             exit();
         }
     } else {

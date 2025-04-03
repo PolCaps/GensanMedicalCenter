@@ -14,9 +14,8 @@ if ($result->num_rows > 0) {
             $statusBadge = "bg-label-warning";
         }
 
-        if ($row["address"] == '') {
-            $add = "N/A";
-        }
+        $add = !empty($row["address"]) ? htmlspecialchars($row["address"]) : "N/A";
+
 
         $type = "Unknown";
 
@@ -29,7 +28,7 @@ if ($result->num_rows > 0) {
         // }
 
         // Construct image path
-        $imgPath = "php/" . $row["image"];
+        $imgPath = "../php/" . $row["image"];
 
         // Limit description to 20 words
         $descWordsa = explode(' ', htmlspecialchars($add));

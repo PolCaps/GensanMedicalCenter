@@ -75,23 +75,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt->bind_param("issss", $user_id, $ip_address, $browser, $device, $location);
                 $stmt->execute();
 
-                header("Location: ../Dashboard.php?loginstatus=success");
+                header("Location: ../admin/Dashboard.php?loginstatus=success");
                 exit();
             } else {
                 $_SESSION['error'] = "Invalid password.";
-                header("Location: ../AdminLogin.php?loginstatus=error");
+                header("Location: ../admin/AdminLogin.php?loginstatus=error");
                 exit();
             }
         } else {
             $_SESSION['error'] = "No Username found.";
-            header("Location: ../AdminLogin.php?loginstatus=error2");
+            header("Location: ../admin/AdminLogin.php?loginstatus=error2");
             exit();
         }
 
         $stmt->close();
     } else {
         $_SESSION['error'] = "Database error. Please try again.";
-        header("Location: ../AdminLogin.php?loginstatus=db_error");
+        header("Location: ../admin/AdminLogin.php?loginstatus=db_error");
         exit();
     }
 }

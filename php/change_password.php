@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $result->fetch_assoc();
 
     if (!$user || !password_verify($currentPassword, $user['password'])) {
-        header("Location: ../Settings.php?changePass=currPassWrong");
+        header("Location: ../admin/Settings.php?changePass=currPassWrong");
         exit();
     }
 
@@ -27,14 +27,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare("UPDATE users SET password = ? WHERE user_id = ?");
     $stmt->bind_param("si", $hashedPassword, $user_id);
     if ($stmt->execute()) {
-        header("Location: ../Settings.php?changePass=success");
+        header("Location: ../admin/Settings.php?changePass=success");
         exit();
     } else {
-        header("Location: ../Settings.php?changePass=error");
+        header("Location: ../admin/Settings.php?changePass=error");
         exit();
     }
 } else {
-    header("Location: ../Settings.php");
+    header("Location: ../admin/Settings.php");
     exit();
 }
 ?>

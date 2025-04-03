@@ -387,7 +387,7 @@
                       echo '  <div class="card h-100">';
                       echo '    <div class="card-body text-body d-flex flex-column justify-content-between h-100">';
                       echo '      <div class="mb-3">';
-                      echo '        <img src="' . htmlspecialchars($logoPath) . '" alt="logo" class="client-logo img-fluid" width="80" />';
+                      echo '        <img src="' . htmlspecialchars($logoPath) . '" alt="logo" class="client-logo img-fluid" width="80"/>';
                       echo '      </div>';
                       echo '      <p>' . htmlspecialchars($row['description']) . '</p>';
                       echo '    </div>';
@@ -448,16 +448,20 @@
                 while ($row = $result->fetch_assoc()) {
 
                   $logoPath2 = "php/" . $row["logo"];
+                  $imagePath = "php/" . $row['logo'];
 
                   echo '  <div class="swiper-slide">';
-                  echo '        <img src="' . htmlspecialchars($logoPath2) . '" 
-                  alt="client logo" 
-                  class="client-logo" 
-                  data-app-light-img="' . htmlspecialchars($logoPath2) . '"
-                  data-app-dark-img="' . htmlspecialchars($logoPath2) . '" />';
+                  echo '  <img src="' . htmlspecialchars($imagePath) . '" 
+                          alt="client logo" 
+                          class="client-logo" 
+                          
+                          
+                          />';
                   echo '  </div>';
 
-
+                  // data-app-light-img="' . htmlspecialchars($imagePath) . '"
+                  // data-app-dark-img="' . htmlspecialchars($imagePath) . '" 
+              
                 }
               } else {
                 echo '<p>No collaborations found.</p>';
@@ -642,7 +646,7 @@
             <div class="card h-100">
                 <div class="card-body">
                     <div class="bg-label-primary rounded-3 text-center mb-3 pb-2 pt-2">
-                        <img class="img-fluid" src="html-starter/AdminGensanMed/php/' . $row['image'] . '" alt="News Image" width="380" />
+                        <img class="img-fluid" src="php/' . $row['image'] . '" alt="News Image" width="380" />
                     </div>
                     <h5 class="mb-2 pb-1">' . htmlspecialchars($row['title']) . '</h5>
                     <p class="">' . htmlspecialchars($row['summary']) . '</p>

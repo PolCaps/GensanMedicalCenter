@@ -40,11 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)) {
                 $imagePath = $targetFilePath; // Update image path if upload is successful
             } else {
-                header("Location: ../NewsUpdate.php?newsStatusup=error");
+                header("Location: ../admin/NewsUpdate.php?newsStatusup=error");
                 exit();
             }
         } else {
-            header("Location: ../NewsUpdate.php?newsStatusup=invalid");
+            header("Location: ../admin/NewsUpdate.php?newsStatusup=invalid");
             exit();
         }
     }
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("ssssi", $title, $summary, $content, $imagePath, $newsId);
 
     if ($stmt->execute()) {
-        header("Location: ../NewsUpdate.php?newsStatusup=success");
+        header("Location: ../admin/NewsUpdate.php?newsStatusup=success");
         exit();
     } else {
         echo json_encode(["status" => "error", "message" => "Database update failed."]);

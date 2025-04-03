@@ -11,7 +11,7 @@ $user = $result->fetch_assoc();
 $stmt->close();
 $conn->close();
 
-$imgPath = "php/" . $user["profile_picture"];
+$imgPath = "../php/" . $user["profile_picture"];
 ?>
 
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"

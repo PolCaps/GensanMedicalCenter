@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 <html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact" dir="ltr"
-  data-theme="theme-default" data-assets-path="assets/" data-template="vertical-menu-template-starter">
+  data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-starter">
 
 <head>
   <meta charset="utf-8" />
@@ -29,29 +29,29 @@ if (!isset($_SESSION['user_id'])) {
     href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="assets/vendor/fonts/tabler-icons.css" />
+  <link rel="stylesheet" href="../assets/vendor/fonts/tabler-icons.css" />
   <!-- <link rel="stylesheet" href="../../assets/vendor/fonts/fontawesome.css" /> -->
   <!-- <link rel="stylesheet" href="../../assets/vendor/fonts/flag-icons.css" /> -->
 
   <!-- Core CSS -->
-  <link rel="stylesheet" href="assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-  <link rel="stylesheet" href="assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="assets/css/demo.css" />
+  <link rel="stylesheet" href="../assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="../assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="../assets/css/demo.css" />
 
   <!-- Vendors CSS -->
-  <link rel="stylesheet" href="assets/vendor/libs/node-waves/node-waves.css" />
-  <link rel="stylesheet" href="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-  <link rel="stylesheet" href="assets/vendor/libs/sweetalert2/sweetalert2.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/node-waves/node-waves.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <link rel="stylesheet" href="../assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
   <!-- Page CSS -->
 
   <!-- Helpers -->
-  <script src="assets/vendor/js/helpers.js"></script>
+  <script src="../assets/vendor/js/helpers.js"></script>
   <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
   <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-  <script src="assets/vendor/js/template-customizer.js"></script>
+  <script src="../assets/vendor/js/template-customizer.js"></script>
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-  <script src="assets/js/config.js"></script>
+  <script src="../assets/js/config.js"></script>
 </head>
 
 <body>
@@ -64,7 +64,7 @@ if (!isset($_SESSION['user_id'])) {
         <div class="app-brand demo">
           <a href="Dashboard.php" class="app-brand-link">
             <span class="app-brand-logo demo">
-              <img src="assets/GMC_Photos/logo.png" alt="Logo" width="25px" height="25px">
+              <img src="../assets/GMC_Photos/logo.png" alt="Logo" width="25px" height="25px">
             </span>
             <span class="app-brand-text demo menu-text fw-bold text-success px-4">Menu</span>
           </a>
@@ -131,7 +131,7 @@ if (!isset($_SESSION['user_id'])) {
         <!-- Navbar -->
 
         <?php
-        include 'include/upnav.php';
+        include '../include/upnav.php';
         ?>
         <!-- / Navbar -->
 
@@ -144,7 +144,7 @@ if (!isset($_SESSION['user_id'])) {
 
             <div class="row"> <!-- View sales -->
               <?php
-              include 'php/db_connection.php';
+              include '../php/db_connection.php';
 
               $sql = "SELECT 
                       COUNT(*) AS total_collaborators, 
@@ -190,7 +190,7 @@ if (!isset($_SESSION['user_id'])) {
                     </div>
                     <div class="col-5 text-center text-sm-left">
                       <div class="card-body pb-0 px-0 px-md-4">
-                        <img src="assets/GMC_Photos/General_Image/collaboration.png" height="140" alt="view sales" />
+                        <img src="../assets/GMC_Photos/General_Image/collaboration.png" height="140" alt="view sales" />
                       </div>
                     </div>
                   </div>
@@ -276,14 +276,14 @@ if (!isset($_SESSION['user_id'])) {
               <!--/ Statistics -->
             </div>
             <?php
-            include 'include/logoutModal.php';
+            include '../include/logoutModal.php';
             ?>
           </div>
           <!-- / Content -->
 
           <!-- Footer -->
           <?php
-          include 'include/footer.php';
+          include '../include/footer.php';
           ?>
           <!-- / Footer -->
 
@@ -328,22 +328,22 @@ if (!isset($_SESSION['user_id'])) {
     }
     );
   </script>
-  <script src="assets/vendor/libs/jquery/jquery.js"></script>
-  <script src="assets/vendor/libs/popper/popper.js"></script>
-  <script src="assets/vendor/js/bootstrap.js"></script>
-  <script src="assets/vendor/libs/node-waves/node-waves.js"></script>
-  <script src="assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-  <script src="assets/vendor/libs/hammer/hammer.js"></script>
+  <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="../assets/vendor/libs/popper/popper.js"></script>
+  <script src="../assets/vendor/js/bootstrap.js"></script>
+  <script src="../assets/vendor/libs/node-waves/node-waves.js"></script>
+  <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="../assets/vendor/libs/hammer/hammer.js"></script>
 
-  <script src="assets/vendor/js/menu.js"></script>
+  <script src="../assets/vendor/js/menu.js"></script>
 
   <!-- endbuild -->
 
   <!-- Vendors JS -->
-  <script src="assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+  <script src="../assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
   <!-- Main JS -->
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/extended-ui-sweetalert2.js"></script>
+  <script src="../assets/js/main.js"></script>
+  <script src="../assets/js/extended-ui-sweetalert2.js"></script>
   <!-- Page JS -->
 
 </body>

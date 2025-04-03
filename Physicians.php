@@ -129,7 +129,7 @@
       if ($result->num_rows > 0) {
         echo '<div class="row gy-5" style="max-height: 800px; overflow-y: auto;">';
         while ($row = $result->fetch_assoc()) {
-          $imgPath = "html-starter/AdminGensanMed/php/" . $row["image"];
+          $imgPath = "php/" . $row["image"];
           $fullName = $row["fName"] . " " . $row["mName"] . " " . $row["lName"];
           $specialty = $row["specialty"];
           $clinic = !empty($row["address"]) ? $row["address"] : "N/A";

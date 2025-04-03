@@ -55,10 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $updateStmt->bind_param("sssss", $email, $username, $phoneNumber, $profileImage, $userId);
 
         if ($updateStmt->execute()) {
-            header("Location: ../Profile.php?updateStatus=success");
+            header("Location: ../admin/Profile.php?updateStatus=success");
             exit();
         } else {
-            header("Location: ../Profile.php?updateStatus=error");
+            header("Location: ../admin/Profile.php?updateStatus=error");
             exit();
         }
 

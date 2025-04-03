@@ -3,7 +3,7 @@
 include "db_connection.php";
 
 // Fetch data from the collaborations table
-$sql = "SELECT * FROM news WHERE status = 4";
+$sql = "SELECT * FROM news WHERE status = 3";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -11,13 +11,12 @@ if ($result->num_rows > 0) {
 
 
         // Determine badge color based on status
-        if ($row["status"] == 4) {
-
+        if ($row["status"] == 3) {
             $statusBadge = "bg-label-warning"; // Green
         }
 
         // Construct image path
-        $imgPath = "php/" . $row["image"];
+        $imgPath = "../php/" . $row["image"];
 
         // Limit description to 20 words
         $descWords = explode(' ', htmlspecialchars($row["summary"]));

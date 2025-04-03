@@ -26,7 +26,7 @@ if ($result->num_rows > 0) {
         }
 
         // Construct image path
-        $imgPath = "php/" . $row["image"];
+        $imgPath = "../php/" . $row["image"];
 
         // Limit description to 20 words
         $descWordsa = explode(' ', htmlspecialchars($type));

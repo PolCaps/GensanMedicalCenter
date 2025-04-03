@@ -21,7 +21,7 @@ if ($result->num_rows > 0) {
         }
 
         // Construct image path
-        $logoPath = "php/" . $row["logo"];
+        $logoPath = "../php/" . $row["logo"];
 
         // Limit description to 20 words
         $descWords = explode(' ', htmlspecialchars($row["description"]));

@@ -128,8 +128,7 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-md-6">
-          <img src="html-starter/AdminGensanMed/php/<?php echo htmlspecialchars($news['image']); ?>"
-            class="img-fluid rounded" alt="News Image">
+          <img src="php/<?php echo htmlspecialchars($news['image']); ?>" class="img-fluid rounded" alt="News Image">
         </div>
         <div class="col-md-6">
           <h2><?php echo htmlspecialchars($news['title']); ?></h2>

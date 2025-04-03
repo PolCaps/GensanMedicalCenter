@@ -44,27 +44,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $updateStmt->execute();
                     }
 
-                    header("Location: ../NewsUpdate.php?newsStatus=success");
+                    header("Location: ../admin/NewsUpdate.php?newsStatus=success");
                     exit();
                 } else {
                     echo json_encode(["status" => "error", "message" => "Database insert failed."]);
                 }
                 $stmt->close();
             } else {
-                header("Location: ../NewsUpdate.php?newsStatus=error");
+                header("Location: ../admin/NewsUpdate.php?newsStatus=error");
                 exit();
             }
         } else {
-            header("Location: ../NewsUpdate.php?newsStatus=invalid");
+            header("Location: ../admin/NewsUpdate.php?newsStatus=invalid");
             exit();
         }
     } else {
-        header("Location: ../NewsUpdate.php?newsStatus=noImage");
+        header("Location: ../admin/NewsUpdate.php?newsStatus=noImage");
         exit();
     }
     $conn->close();
 } else {
-    header("Location: ../NewsUpdate.php?newsStatus=invalidRequest");
+    header("Location: ../admin/NewsUpdate.php?newsStatus=invalidRequest");
     exit();
 }
 ?>
